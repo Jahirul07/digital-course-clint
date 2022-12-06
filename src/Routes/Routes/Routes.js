@@ -11,16 +11,23 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
             },
             {
                 path: '/category/:id',
-                element: <Category></Category>
+                element: <Category></Category>,
+                loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
             },
             {
                 path: '/course/:id',
                 element: <Course></Course>
+            },
+            {
+                path: '/courses',
+                element: <Course></Course>,
+                loader: () => fetch('http://localhost:5000/courses')
             }
+
         ]
     }
 ])

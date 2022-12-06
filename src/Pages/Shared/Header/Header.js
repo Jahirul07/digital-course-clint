@@ -3,18 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
 import TopCategory from '../TopCategory/TopCategory';
+import './Header.css'
 
 
 const Header = () => {
     return (
         <Navbar collapseOnSelect className='mb-4 shadow' expand="lg" bg="light" variant="light">
       <Container>
-        <Navbar.Brand className='fw-bold' href="#home">Digital Course</Navbar.Brand>
+        <Navbar.Brand className='fw-bold'><Link to='/'>Digital Course</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">All Courses</Nav.Link>
+            <Nav.Link ><Link to='/courses'>All Courses</Link></Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
