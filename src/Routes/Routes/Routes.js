@@ -3,6 +3,7 @@ import Main from "../../layout/Main";
 import Category from "../../Pages/Category/Category/Category";
 import Course from "../../Pages/Course/Course";
 import Home from "../../Pages/Home/Home";
+import PremiumCourse from "../../Pages/PremiunCourse/PremiumCourse";
 
 export const routes = createBrowserRouter([
     {
@@ -19,8 +20,10 @@ export const routes = createBrowserRouter([
                 loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
             },
             {
-                path: '/course/:id',
-                element: <Course></Course>
+                path: '/courses/:id',
+                element: <PremiumCourse></PremiumCourse>,
+                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`)
+                
             },
             {
                 path: '/courses',

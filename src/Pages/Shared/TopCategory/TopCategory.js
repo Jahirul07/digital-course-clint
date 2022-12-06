@@ -13,7 +13,7 @@ const TopCategory = () => {
 
     return (
         <div>
-            <h4>Total Category: {categories.length}</h4>
+            <h4>Total Category</h4>
             <div>
                 {
                     categories.map( category => <p

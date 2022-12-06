@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 
 
 const CourseCard = ({course}) => {
-    const {title, thumbnail_url, details, rating, total_download} = course;
-    console.log(course);
+    const {_id ,title, thumbnail_url, details, rating, total_download} = course;
+    // console.log(course);
     return (
         <div className='mb-5'>
-            <Card style={{ width: '30rem'}}>
+            <Card>
             <Card.Img variant="top" src={thumbnail_url} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
@@ -23,7 +23,7 @@ const CourseCard = ({course}) => {
                         <p><span className='me-2'><FaStar className='text-warning'></FaStar> {rating?.number}</span> <span><FaDownload></FaDownload>{total_download}</span></p>
                     </div>
                     <div>
-                    <Button variant="primary"><Link className='text-light'>Premium Access</Link></Button>
+                    <Button variant="primary"><Link to={`/courses/${_id}`} className='text-light'>Course Details</Link></Button>
                     </div>
                 </Card.Footer>
             </Card.Body>
