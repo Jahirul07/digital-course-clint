@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import TopCategory from '../TopCategory/TopCategory';
@@ -11,7 +12,12 @@ import './Header.css'
 
 
 const Header = () => {
-    const {user} = useContext(AuthContext)
+    const {user, logOut} = useContext(AuthContext)
+    const handleLogOut = () =>{
+      logOut()
+      .then( () => {})
+      .catch( error => console.log(error))
+    }
     return (
         <Navbar collapseOnSelect className='mb-4 shadow' expand="lg" bg="light" variant="light">
       <Container>
@@ -34,9 +40,31 @@ const Header = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">{user?.displayName}</Nav.Link>
-            <Nav.Link><Button variant="light"><Link to='/login'>Login</Link></Button></Nav.Link>
-            <Nav.Link><Button variant="light"><Link to='/register'>Sign Up</Link></Button></Nav.Link>
+            <Nav.Link>
+              {
+                user?.uid ?
+                <>
+                <Button variant="light" onClick={handleLogOut}><Link>SignOut</Link></Button>
+                <span>{user?.displayName}</span>
+                
+                </>
+                :
+                <>
+                <Link className='me-3' to='/login'>Login</Link>
+                <Link to='/register'>Sign Up</Link>
+                </>
+              }
+            </Nav.Link>
+
+
+            {/* <Nav.Link><Button variant="light"><Link to='/login'>Login</Link></Button></Nav.Link>
+            <Nav.Link><Button variant="light"><Link to='/register'>Sign Up</Link></Button></Nav.Link> */}
+            <Nav.Link>
+              {user?.photoURL ?
+              <Image style={{height: '40px'}} roundedCircle src={user?.photoURL}></Image>
+              : <FaUser></FaUser>
+            }
+            </Nav.Link>
           </Nav>
           <div className='d-lg-none'>
             <TopCategory></TopCategory>

@@ -12,6 +12,10 @@ const Register = () => {
 
     const googleProvider = new GoogleAuthProvider()
 
+    const handleSubmit = event =>{
+      event.preventDefault()
+    }
+
     const handleGoogleSignIn = () =>{
      
       loginWithGoogle(googleProvider)
@@ -25,26 +29,26 @@ const Register = () => {
     return (
         <div>
         <div>
-            <Form className='w-50'>
+            <Form onSubmit={handleSubmit} className='w-50'>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Full Name</Form.Label>
         <Form.Control name='name' type="name" placeholder="Your Name" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control name='email' type="email" placeholder="Enter email" />
+        <Form.Control name='email' type="email" placeholder="Enter email" required /> 
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control name='password' type="password" placeholder="Password" />
+        <Form.Control name='password' type="password" placeholder="Password" required/>
       </Form.Group>
       <Button variant="primary" type="submit">
         Submit
       </Button>
     </Form>
         </div>
-        <h4>LogIn with Social Media</h4>
+        <h4>Register with Social Media</h4>
         <div className='m2-5'>
            <button onClick={handleGoogleSignIn} className='rounded me-3'><span><FaGoogle></FaGoogle></span></button>
             <button className='rounded me-3'><span><FaGithub></FaGithub></span></button>
