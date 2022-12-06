@@ -35,8 +35,8 @@ const Header = () => {
           </Nav>
           <Nav>
             <Nav.Link href="#deets">{user?.displayName}</Nav.Link>
-            <Button variant="light"><Link to='/login'>Login</Link></Button>
-            <Button variant="light"><Link to='/register'>Sign Up</Link></Button>
+            <Nav.Link><Button variant="light"><Link to='/login'>Login</Link></Button></Nav.Link>
+            <Nav.Link><Button variant="light"><Link to='/register'>Sign Up</Link></Button></Nav.Link>
           </Nav>
           <div className='d-lg-none'>
             <TopCategory></TopCategory>
