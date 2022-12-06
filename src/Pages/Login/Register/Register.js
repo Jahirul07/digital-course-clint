@@ -8,12 +8,25 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 
 const Register = () => {
-    const {loginWithGoogle} = useContext(AuthContext);
+    const {loginWithGoogle, createUser} = useContext(AuthContext);
 
     const googleProvider = new GoogleAuthProvider()
 
     const handleSubmit = event =>{
-      event.preventDefault()
+      event.preventDefault();
+      const form = event.target;
+      const name = form.name.value;
+      const email = form.email.value;
+      const password = form.password.value;
+      form.reset();
+      console.log(name)
+
+      createUser(email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user)
+      })
+      .catch(e => console.log(e))
     }
 
     const handleGoogleSignIn = () =>{
@@ -30,7 +43,7 @@ const Register = () => {
         <div>
         <div>
             <Form onSubmit={handleSubmit} className='w-50'>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label>Full Name</Form.Label>
         <Form.Control name='name' type="name" placeholder="Your Name" />
       </Form.Group>

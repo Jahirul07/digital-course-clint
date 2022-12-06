@@ -3,12 +3,33 @@ import React,{useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
-  const {loginWithGoogle} = useContext(AuthContext);
+  const {loginWithGoogle, signIn} = useContext(AuthContext);
+
+  const navigate = useNavigate()
 
     const googleProvider = new GoogleAuthProvider()
+
+    const handleSubmit = event => {
+      event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                navigate('/')
+                
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
 
     const handleGoogleSignIn = () =>{
      
@@ -21,22 +42,22 @@ const Login = () => {
     }
     return (
         <div>
-          <Form className='w-50'>
+          <Form onSubmit={handleSubmit} className='w-50'>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Control name='email' type="email" placeholder="Enter email" required />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control name='password' type="password" placeholder="Password" />
       </Form.Group>
       <Button variant="primary" type="submit">
         Submit
       </Button>
     </Form>
           <div>
-          <h4>Register with Social Media</h4>
+          <h4>Login with Social Media</h4>
         <div className='m2-5'>
            <button onClick={handleGoogleSignIn} className='rounded me-3'><span><FaGoogle></FaGoogle></span></button>
             <button className='rounded me-3'><span><FaGithub></FaGithub></span></button>
