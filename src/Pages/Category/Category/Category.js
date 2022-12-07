@@ -5,12 +5,11 @@ import CourseCard from '../../Shared/CourseCard/CourseCard';
 const Category = () => {
     const courseCategory = useLoaderData()
     return (
-        <div>
-            <h2>This is category has Courses</h2>
+        <div className='mt-5'>
             <div className='container'>
             <div className='row'>
             {
-                courseCategory.map( course => <div className='col-6'>
+                courseCategory.map( course => <div className='col-lg-6 col-12'>
                     <CourseCard
                 key={course._id}
                 course={course}

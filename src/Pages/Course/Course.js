@@ -6,8 +6,7 @@ import './Course.css'
 const Course = () => {
     const courses = useLoaderData()
     return (
-        <div>
-            <h2>This is Course Page</h2>
+        <div className='mt-5'>
             <div className='container'>
             <div className='row'>
             {
