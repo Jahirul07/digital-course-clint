@@ -37,16 +37,16 @@ const Header = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link>
-              <Link to="/courses">All Courses</Link>
-            </Nav.Link>
-            <Nav.Link><Link to='/faq'>FAQ</Link></Nav.Link>
-            <Nav.Link>
+            <>
+              <Link className="me-3" to="/courses">All Courses</Link>
+            </>
+            <><Link className="me-3" to='/faq'>FAQ</Link></>
+            <>
               <Link to="/blog">Blog</Link>
-            </Nav.Link>
+            </>
           </Nav>
           <Nav>
-            <Nav.Link>
+            <>
               {user?.uid ? (
                 <>
                   <NavDropdown
@@ -82,7 +82,7 @@ const Header = () => {
                   <Link to="/register">Sign Up</Link>
                 </>
               )}
-            </Nav.Link>
+            </>
 
             {/* <Nav.Link><Button variant="light"><Link to='/login'>Login</Link></Button></Nav.Link>
             <Nav.Link><Button variant="light"><Link to='/register'>Sign Up</Link></Button></Nav.Link> */}

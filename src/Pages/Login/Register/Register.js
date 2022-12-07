@@ -1,5 +1,5 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaGoogle, FaGithub, FaTwitter } from "react-icons/fa";
@@ -7,8 +7,9 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 
 
+
 const Register = () => {
-    const {loginWithGoogle, createUser} = useContext(AuthContext);
+    const {loginWithGoogle, createUser, updateUserProfile} = useContext(AuthContext);
 
     const googleProvider = new GoogleAuthProvider()
 
@@ -19,7 +20,7 @@ const Register = () => {
       const email = form.email.value;
       const password = form.password.value;
       form.reset();
-      console.log(name)
+      handleUpdateUserProfile(name)
 
       createUser(email, password)
       .then(result => {
@@ -37,6 +38,14 @@ const Register = () => {
         console.log(user);
       })
       .catch( error => console.log(error))
+    }
+    const handleUpdateUserProfile = (name) =>{
+      const profile = {
+        displayName: name
+      }
+      updateUserProfile(profile)
+      .then( () => {})
+      .catch(error => console.error(error))
     }
 
     return (

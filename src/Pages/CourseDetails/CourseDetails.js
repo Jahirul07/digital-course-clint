@@ -2,6 +2,8 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useLoaderData } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 const CourseDetails = () => {
     const course = useLoaderData()
@@ -16,14 +18,14 @@ const CourseDetails = () => {
                 <Card.Text>
                {details}
                 </Card.Text>
-                <Card.Footer className="d-flex justify-content-between">
+                <Card.Footer className="d-flex justify-content-between align-items-center">
                     <div>
                     <p>Author: {author.name}</p>
                     </div>
                     <div>
                     <Button variant="light">Bownload PDF</Button>
                     </div>
-                    <div><Button variant="primary">Premium Purcess</Button></div>
+                    <div><Button variant="primary"><Link className='text-light' to='/premium-course'>Premium Pursecc</Link></Button></div>
                 </Card.Footer>
             </Card.Body>
             </Card>

@@ -8,6 +8,8 @@ import FAQ from "../../Pages/FAQ/FAQ";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login/Login";
 import Register from "../../Pages/Login/Register/Register";
+import TermsAndConditions from "../../Pages/Others/TermsAndConditions";
+import PremiumCourse from "../../Pages/PremiunCourse/PremiumCourse";
 import Profile from "../../Pages/Profile/Profile";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
@@ -27,7 +29,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/courses/:id',
-                element: <PrivateRoute><CourseDetails></CourseDetails></PrivateRoute>,
+                element: <CourseDetails></CourseDetails>,
                 loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`)
                 
             },
@@ -55,6 +57,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/faq',
                 element: <FAQ></FAQ>
+            },
+            {
+                path: 'premium-course',
+                element: <PrivateRoute><PremiumCourse></PremiumCourse></PrivateRoute>
             }
 
         ]
