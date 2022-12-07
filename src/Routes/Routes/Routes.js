@@ -8,7 +8,6 @@ import FAQ from "../../Pages/FAQ/FAQ";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login/Login";
 import Register from "../../Pages/Login/Register/Register";
-import TermsAndConditions from "../../Pages/Others/TermsAndConditions";
 import PremiumCourse from "../../Pages/PremiunCourse/PremiumCourse";
 import Profile from "../../Pages/Profile/Profile";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -25,18 +24,18 @@ export const routes = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <Category></Category>,
-                loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({params}) => fetch(`https://digital-course-server-delta.vercel.app/category/${params.id}`)
             },
             {
                 path: '/courses/:id',
                 element: <CourseDetails></CourseDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`)
+                loader: ({params}) => fetch(`https://digital-course-server-delta.vercel.app/courses/$a{params.id}`)
                 
             },
             {
                 path: '/courses',
                 element: <Course></Course>,
-                loader: () => fetch('http://localhost:5000/courses')
+                loader: () => fetch('https://digital-course-server-delta.vercel.app/courses')
             },
             {
                 path: '/login',
