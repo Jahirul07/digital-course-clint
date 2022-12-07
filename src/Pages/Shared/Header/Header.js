@@ -1,78 +1,99 @@
-import React, {useContext} from 'react';
-import { Button, Image } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { FaUser } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
-import TopCategory from '../TopCategory/TopCategory';
-import './Header.css'
-
+import React, { useContext } from "react";
+import { Button, Image } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { FaBookReader, FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
+import TopCategory from "../TopCategory/TopCategory";
+import "./Header.css";
 
 const Header = () => {
-    const {user, logOut} = useContext(AuthContext)
-    const handleLogOut = () =>{
-      logOut()
-      .then( () => {})
-      .catch( error => console.log(error))
-    }
-    return (
-        <Navbar collapseOnSelect className='mb-4 shadow' expand="lg" bg="light" variant="light">
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+  return (
+    <Navbar
+      collapseOnSelect
+      className="mb-4 shadow"
+      expand="lg"
+      bg="light"
+      variant="light"
+    >
       <Container>
-        <Navbar.Brand className='fw-bold'><Link to='/'>Digital Course</Link></Navbar.Brand>
+        <Navbar.Brand className="fw-bold">
+          <Link to="/">
+            <span className="me-2">
+              <FaBookReader></FaBookReader>
+            </span>{" "}
+            Digital Course
+          </Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link ><Link to='/courses'>All Courses</Link></Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
+            <Nav.Link>
+              <Link to="/courses">All Courses</Link>
+            </Nav.Link>
+            <Nav.Link><Link to='/faq'>FAQ</Link></Nav.Link>
+            <Nav.Link>
+              <Link to="/blog">Blog</Link>
+            </Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link>
-              {
-                user?.uid ?
+              {user?.uid ? (
                 <>
-                <Button variant="light" onClick={handleLogOut}><Link>SignOut</Link></Button>
-                <span>{user?.displayName}</span>
-                
+                  <NavDropdown
+                    title={
+                      user?.photoURL ? (
+                        <Image
+                          title={user?.displayName}
+                          style={{ height: "40px" }}
+                          roundedCircle
+                          src={user?.photoURL}
+                        ></Image>
+                      ) : (
+                        <FaUser></FaUser>
+                      )
+                    }
+                    id="collasible-nav-dropdown"
+                  >
+                    <NavDropdown.Item>
+                      <Link to="/profile">Profile</Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item>
+                      <Button variant="light" onClick={handleLogOut}>
+                        <Link>SignOut</Link>
+                      </Button>
+                    </NavDropdown.Item>
+                  </NavDropdown>
                 </>
-                :
+              ) : (
                 <>
-                <Link className='me-3' to='/login'>Login</Link>
-                <Link to='/register'>Sign Up</Link>
+                  <Link className="me-3" to="/login">
+                    Login
+                  </Link>
+                  <Link to="/register">Sign Up</Link>
                 </>
-              }
+              )}
             </Nav.Link>
-
 
             {/* <Nav.Link><Button variant="light"><Link to='/login'>Login</Link></Button></Nav.Link>
             <Nav.Link><Button variant="light"><Link to='/register'>Sign Up</Link></Button></Nav.Link> */}
-            <Nav.Link>
-              {user?.photoURL ?
-              <Image style={{height: '40px'}} roundedCircle src={user?.photoURL}></Image>
-              : <FaUser></FaUser>
-            }
-            </Nav.Link>
           </Nav>
-          <div className='d-lg-none'>
+          <div className="d-lg-none">
             <TopCategory></TopCategory>
           </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    );
+  );
 };
 
 export default Header;
