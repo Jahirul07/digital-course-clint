@@ -3,12 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useLoaderData } from 'react-router-dom';
 import { Link } from "react-router-dom";
-
+import jsPDF from 'jspdf'
 
 const CourseDetails = () => {
+    const pdfGenerate = () =>{
+        let doc = new jsPDF('landscape', 'px', 'a4', 'false')
+        doc.save('a.pdf')
+    }
+
     const course = useLoaderData()
-    console.log(course)
-    const { author,title, details, thumbnail_url} = course;
+    const { _id,author,title, details, thumbnail_url} = course;
     return (
         <div>
             <Card>
@@ -23,14 +27,14 @@ const CourseDetails = () => {
                     <p>Author: {author.name}</p>
                     </div>
                     <div>
-                    <Button variant="light">Bownload PDF</Button>
+                    <Button onClick={pdfGenerate} variant="light">Download PDF</Button>
                     </div>
-                    <div><Button variant="primary"><Link className='text-light' to='/premium-course'>Premium Pursecc</Link></Button></div>
+                    <div>
+                        <Button variant="primary"><Link className='text-light' to={`/premium-course/${_id}`}>Premium Pursecc</Link></Button></div>
                 </Card.Footer>
             </Card.Body>
             </Card>
         </div>
     );
 };
-
 export default CourseDetails;

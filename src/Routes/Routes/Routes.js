@@ -29,7 +29,7 @@ export const routes = createBrowserRouter([
             {
                 path: '/courses/:id',
                 element: <CourseDetails></CourseDetails>,
-                loader: ({params}) => fetch(`https://digital-course-server-delta.vercel.app/courses/$a{params.id}`)
+                loader: ({params}) => fetch(`https://digital-course-server-delta.vercel.app/courses/${params.id}`)
                 
             },
             {
@@ -58,8 +58,9 @@ export const routes = createBrowserRouter([
                 element: <FAQ></FAQ>
             },
             {
-                path: 'premium-course',
-                element: <PrivateRoute><PremiumCourse></PremiumCourse></PrivateRoute>
+                path: '/premium-course/:id',
+                element: <PrivateRoute><PremiumCourse></PremiumCourse></PrivateRoute>,
+                loader: ({params}) => fetch(`https://digital-course-server-delta.vercel.app/courses/${params.id}`)
             }
 
         ]

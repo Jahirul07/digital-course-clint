@@ -3,7 +3,7 @@ import React,{useContext, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
@@ -64,6 +64,7 @@ const Login = () => {
         {error}
       </Form.Text>
     </Form>
+    <p>Create a new account, Please <Link to='/register'>Register</Link></p>
           <div>
           <h4>Login with Social Media</h4>
         <div className='m2-5'>

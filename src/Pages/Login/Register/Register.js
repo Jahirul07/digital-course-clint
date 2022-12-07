@@ -3,6 +3,7 @@ import React, { useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaGoogle, FaGithub, FaTwitter } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 
@@ -69,6 +70,7 @@ const Register = () => {
         Submit
       </Button>
     </Form>
+    <p>Already have an account,Please <Link to='/login'>Login</Link></p>
         </div>
         <h4>Register with Social Media</h4>
         <div className='m2-5'>

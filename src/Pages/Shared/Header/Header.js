@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import TopCategory from "../TopCategory/TopCategory";
 import "./Header.css";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+import Toggle from "../../Others/Toggle";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -45,6 +48,7 @@ const Header = () => {
               <Link to="/blog">Blog</Link>
             </>
           </Nav>
+          <Toggle></Toggle>
           <Nav>
             <>
               {user?.uid ? (
@@ -52,12 +56,26 @@ const Header = () => {
                   <NavDropdown
                     title={
                       user?.photoURL ? (
-                        <Image
-                          title={user?.displayName}
+                        <>
+                        {[ 'bottom'].map((placement) => (
+                          <OverlayTrigger
+                            key={placement}
+                            placement={placement}
+                            overlay={
+                              <Tooltip id={`tooltip-${placement}`}>
+                                {user?.displayName}
+                              </Tooltip>
+                            }
+                          >
+                            <Image
                           style={{ height: "40px" }}
                           roundedCircle
                           src={user?.photoURL}
                         ></Image>
+                          </OverlayTrigger>
+                        ))}
+                        </>
+                        
                       ) : (
                         <FaUser></FaUser>
                       )
@@ -83,9 +101,6 @@ const Header = () => {
                 </>
               )}
             </>
-
-            {/* <Nav.Link><Button variant="light"><Link to='/login'>Login</Link></Button></Nav.Link>
-            <Nav.Link><Button variant="light"><Link to='/register'>Sign Up</Link></Button></Nav.Link> */}
           </Nav>
           <div className="d-lg-none">
             <TopCategory></TopCategory>
